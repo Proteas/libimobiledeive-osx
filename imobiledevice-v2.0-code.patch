@@ -1,0 +1,82 @@
+--- device_link_service.c	2015-01-28 09:10:32.000000000 +0800
++++ device_link_service-patched.c	2015-04-13 16:03:23.000000000 +0800
+@@ -82,6 +82,7 @@
+  *     DEVICE_LINK_SERVICE_E_INVALID_ARG when one of the parameters is invalid,
+  *     or DEVICE_LINK_SERVICE_E_MUX_ERROR when the connection failed.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_client_new(idevice_t device, lockdownd_service_descriptor_t service, device_link_service_client_t *client)
+ {
+ 	if (!device || !service || service->port == 0 || !client || *client) {
+@@ -116,6 +117,7 @@
+  *     is invalid, or DEVICE_LINK_SERVICE_E_UNKNOWN_ERROR when the was an error
+  *     freeing the parent property_list_service client.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_client_free(device_link_service_client_t client)
+ {
+ 	if (!client)
+@@ -145,6 +147,7 @@
+  *     given by the device is larger than the given version,
+  *     or DEVICE_LINK_SERVICE_E_UNKNOWN_ERROR otherwise.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_version_exchange(device_link_service_client_t client, uint64_t version_major, uint64_t version_minor)
+ {
+ 	if (!client)
+@@ -246,6 +249,7 @@
+  *     or DEVICE_LINK_SERVICE_E_MUX_ERROR when there's an error when sending
+  *     the the disconnect message.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_disconnect(device_link_service_client_t client, const char *message)
+ {
+ 	if (!client)
+@@ -277,6 +281,7 @@
+  *     or DEVICE_LINK_SERVICE_E_MUX_ERROR if the DLMessagePing plist could
+  *     not be sent.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_send_ping(device_link_service_client_t client, const char *message)
+ {
+ 	if (!client || !client->parent || !message)
+@@ -305,6 +310,7 @@
+  *     message is not a PLIST_DICT, or DEVICE_LINK_SERVICE_E_MUX_ERROR if
+  *     the DLMessageProcessMessage plist could not be sent.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_send_process_message(device_link_service_client_t client, plist_t message)
+ {
+ 	if (!client || !client->parent || !message)
+@@ -342,6 +348,7 @@
+  *    or is not a DL* message plist, or DEVICE_LINK_SERVICE_E_MUX_ERROR if
+  *    receiving from the device failed.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_receive_message(device_link_service_client_t client, plist_t *msg_plist, char **dlmessage)
+ {
+ 	if (!client || !client->parent || !msg_plist)
+@@ -372,6 +379,7 @@
+  *    invalid or is not a DLMessageProcessMessage,
+  *    or DEVICE_LINK_SERVICE_E_MUX_ERROR if receiving from device fails.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_receive_process_message(device_link_service_client_t client, plist_t *message)
+ {
+ 	if (!client || !client->parent || !message)
+@@ -427,6 +435,7 @@
+  *     or DEVICE_LINK_SERVICE_E_MUX_ERROR when the given property list could
+  *     not be sent.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_send(device_link_service_client_t client, plist_t plist)
+ {
+ 	if (!client || !plist) {
+@@ -449,6 +458,7 @@
+  *     or DEVICE_LINK_SERVICE_E_MUX_ERROR when no property list could be
+  *     received.
+  */
++LIBIMOBILEDEVICE_API
+ device_link_service_error_t device_link_service_receive(device_link_service_client_t client, plist_t *plist)
+ {
+ 	if (!client || !plist || (plist && *plist)) {
